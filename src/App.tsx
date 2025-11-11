@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/client/react'
 import { apolloClient } from '@/lib/apollo-client'
 import { AuthProvider, useAuth } from '@/contexts/AuthContext'
@@ -15,22 +15,7 @@ import DestinatariosPage from '@/pages/dashboard/DestinatariosPage'
 import EntregasPage from '@/pages/dashboard/EntregasPage'
 import SurveyResponsePage from '@/pages/survey/SurveyResponsePage'
 
-// Componente para proteger rutas de admin
-function AdminRoute({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth()
-  
-  if (loading) {
-    return <div className="flex items-center justify-center h-screen">Cargando...</div>
-  }
-  
-  if (!user?.es_admin) {
-    return <Navigate to="/dashboard" replace />
-  }
-  
-  return <>{children}</>
-}
-
-// Componente para redirigir según tipo de usuario
+// Componente para redireccionar según tipo de usuario
 function DashboardRedirect() {
   const { user, loading } = useAuth()
   

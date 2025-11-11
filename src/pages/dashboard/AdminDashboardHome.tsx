@@ -13,9 +13,16 @@ const GET_ADMIN_STATS = gql`
   }
 `
 
+interface AdminStats {
+  totalUsuarios: number
+  totalEncuestas: number
+  totalCampanas: number
+  totalEntregas: number
+}
+
 export default function AdminDashboardHome() {
   const { user } = useAuth()
-  const { data, loading } = useQuery(GET_ADMIN_STATS)
+  const { data, loading } = useQuery<AdminStats>(GET_ADMIN_STATS)
 
   return (
     <div className="space-y-6">
